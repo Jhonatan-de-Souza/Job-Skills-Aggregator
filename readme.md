@@ -18,12 +18,14 @@ No. Sometimes job listings are more of a "wish list" than actual requirements fo
 
 # Job boards
 
-- Wellfound - http://wellfound.com/
-- Y Combinator - https://www.ycombinator.com/jobs
-- hnhiring - https://hnhiring.com/
-- Hiring Cafe - https://hiring.cafe/
-- Indeed - https://indeed.com/
-- LinkedIn Jobs - https://www.linkedin.com/jobs/
+| Job Board | Status |
+|-----------|--------|
+| Indeed | 🚀 In Progress |
+| Hiring Cafe | ❌ Not Implemented Yet |
+| Y Combinator | ❌ Not Implemented Yet |
+| hnhiring | ❌ Not Implemented Yet |
+| LinkedIn Jobs | ❌ Not Implemented Yet |
+| Wellfound | ❌ Not Implemented Yet |
 
 # Credentials you need to provide for this to work
 

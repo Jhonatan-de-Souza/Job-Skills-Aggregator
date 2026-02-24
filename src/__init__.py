@@ -1,0 +1,1 @@
+"""Job Scraper Data package."""

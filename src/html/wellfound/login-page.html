@@ -1,0 +1,1049 @@
+<html
+    class="notranslate js scheme-white_all ml no-ms no-mm size-standard responsive filereader smil no-touchevents no-overflowscrolling csstransforms csstransitions no-force-desktop"
+    xmlns:fb="http://ogp.me/ns/fb#" style="">
+
+<head>
+    <script>
+        window.ddjskey = "BA3EB296E8BE96A496929870E20CD4";
+        window.ddoptions = { "ajaxListenerPath": "wellfound.com", "overrideAbortFetch": true, "allowHtmlContentTypeOnCaptcha": true, "endpoint": "https://ddm.wellfound.com/js/" };
+    </script>
+    <script src="https://ddm.wellfound.com/tags.js" async="">
+    </script>
+
+    <script>
+        //<![CDATA[
+        window._stripeKey = "pk_live_LVuuoof98c4wqw91j9BWsrOs"
+
+        //]]>
+    </script>
+    <script>
+
+        "use strict";
+
+        (function () {
+            function createScriptLoadPromise(script) {
+                return new Promise((resolve, reject) => {
+                    script.onload = resolve;
+                    script.onerror = reject;
+                });
+            }
+
+            let trustArcPromise;
+
+            const userAgentPatterns = "Googlebot|bingbot";
+            const hideFromUserAgent = new RegExp(userAgentPatterns).test(
+                navigator.userAgent
+            );
+
+            if (!hideFromUserAgent) {
+                const trustArcScript = document.createElement('script');
+                trustArcScript.src = "https://consent.trustarc.com/v2/notice/gsyiod?pcookie";
+                trustArcScript.type = 'text/javascript';
+                trustArcScript.async = true;
+                document.head.appendChild(trustArcScript);
+                trustArcPromise = createScriptLoadPromise(trustArcScript);
+            } else {
+                trustArcPromise = Promise.resolve();
+            }
+
+            const consentManagerScript = document.createElement('script');
+            consentManagerScript.src = '/javascripts/consentManager.js?4f1aaa4e6661';
+            consentManagerScript.type = 'text/javascript';
+            consentManagerScript.async = true;
+            document.head.appendChild(consentManagerScript);
+            const consentManagerPromise = createScriptLoadPromise(consentManagerScript);
+
+            Promise.all([
+                trustArcPromise,
+                consentManagerPromise,
+            ]).then(() => {
+                const consentManager = window.Consent.ConsentManager;
+                const log = window.Consent.createLogger("lib:consentManager:rails");
+
+                if (consentManager) {
+                    log(`Consent manager loaded`);
+
+                    consentManager.addConsentChangedListener(
+                        'functional',
+                        () => {
+                            log('Initializing typekit');
+
+                            (function (d) {
+                                var config = {
+                                    kitId: 'jdy1kdx',
+                                    scriptTimeout: 3000
+                                },
+                                    h = d.documentElement, t = setTimeout(function () { h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive"; }, config.scriptTimeout), tk = d.createElement("script"), f = false, s = d.getElementsByTagName("script")[0], a; h.className += " wf-loading"; tk.src = '//use.typekit.net/' + config.kitId + '.js'; tk.async = true; tk.onload = tk.onreadystatechange = function () { a = this.readyState; if (f || a && a != "complete" && a != "loaded") return; f = true; clearTimeout(t); try { Typekit.load(config) } catch (e) { } }; s.parentNode.insertBefore(tk, s)
+                            })(document);
+                        },
+                        (options) => {
+                            options.requestReload();
+                        }
+                    );
+
+                    window.Consent.initSegment({
+                        writeKey: "poTMRBHig2tYBNBP5P6kGfkGBFq19jmB",
+                        cookieDomain: "wellfound.com",
+                        load: (writeKey, integrations) => {
+                            var analytics = window.analytics = window.analytics || []; if (!analytics.initialize) if (analytics.invoked) window.console && console.error && console.error("Segment snippet included twice."); else {
+                                analytics.invoked = !0; analytics.methods = ["trackSubmit", "trackClick", "trackLink", "trackForm", "pageview", "identify", "reset", "group", "track", "ready", "alias", "debug", "page", "once", "off", "on", "addSourceMiddleware", "addIntegrationMiddleware", "setAnonymousId", "addDestinationMiddleware"]; analytics.factory = function (e) { return function () { var t = Array.prototype.slice.call(arguments); t.unshift(e); analytics.push(t); return analytics } }; for (var e = 0; e < analytics.methods.length; e++) { var key = analytics.methods[e]; analytics[key] = analytics.factory(key) } analytics.load = function (key, e) {
+                                    var t = document.createElement("script"); t.type = "text/javascript"; t.async = !0;
+                                    t.src = "https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js"; var n = document.getElementsByTagName("script")[0]; n.parentNode.insertBefore(t, n); analytics._loadOptions = e
+                                };
+                                analytics._writeKey = "poTMRBHig2tYBNBP5P6kGfkGBFq19jmB";
+                                analytics.SNIPPET_VERSION = "4.15.2";
+                                analytics.load("poTMRBHig2tYBNBP5P6kGfkGBFq19jmB", { cookie: { domain: "wellfound.com", secure: true }, integrations: integrations });
+
+                                window.analytics_enabled = true;
+
+
+                                analytics.page();
+                            }
+                        },
+                        reset: () => {
+                            window.analytics_enabled = false;
+                            analytics.reset();
+                        }
+                    });
+
+                    consentManager.addConsentChangedListener(
+                        'functional',
+                        () => {
+                            (function (c, l, a, r, i, t, y) {
+                                c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+                                t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+                                y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+                            })(window, document, "clarity", "script", "m9tpuk6fvx");
+
+                            window.clarity('consent');
+
+
+
+                            log('Clarity consent granted');
+                        },
+                        (options) => {
+                            window.clarity('consent', false);
+                            options.requestReload();
+                            log('Clarity consent removed');
+                        }
+                    );
+
+                    consentManager.init({
+                        defaultToFullConsent: false,
+                    });
+
+                    log('Consent manager initialized');
+
+                    // Let outside dependencies know that we've fully initialized the consent manager
+                    setTimeout(() => {
+                        window.dispatchEvent(new Event('wellfound:consentManager:ready'));
+                        log('Consent manager ready event dispatched');
+                    }, 0);
+                } else {
+                    log('ConsentManager not found');
+                }
+            }).catch((error) => {
+                console.error('Error loading consent manager scripts:', error);
+            });
+        })();
+
+
+    </script>
+    <script src="https://consent.trustarc.com/v2/notice/gsyiod?pcookie" type="text/javascript" async=""></script>
+    <script src="/javascripts/consentManager.js?4f1aaa4e6661" type="text/javascript" async=""></script>
+
+    <title>Log In | Wellfound</title>
+    <meta name="csrf-param" content="authenticity_token">
+    <meta name="csrf-token"
+        content="KV55SuF3aMjrSarN+nn3pxpOUJLWHjZLRMoZWxX790ilM/Mb2Gssn1XCRhi09aRyCxOixSHrwgC0ditdqP01ZQ==">
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <meta content="en_US" http-equiv="Content-Language">
+    <meta content="c2y_K2CiLmGeet7GUQc9e3RVGp_gCOxUC4IdJg_RBVo" name="google-site-verification">
+    <meta content="00bd751d25bdb494779b40bedece7089" name="detectify-verification">
+    <meta content="initial-scale=1.0,maximum-scale=2.0,width=device-width" name="viewport">
+    <meta content="notranslate" name="google">
+    <meta content="Log in with your email address or favorite social network." name="description">
+    <meta content="Wellfound" property="og:site_name">
+    <meta
+        content="https://wellfound.com/assets/logo/og_image-36be61ceeb9edf7bb87dbe020fdc3a6428c127f06daf3692fc5e4e1856acc81a.png"
+        name="image" property="og:image">
+    <link href="https://wellfound.com/login" rel="canonical">
+    <meta content="noindex" name="robots">
+
+    <link rel="stylesheet" media="all" href="/webpack/tailwind-2553945cbcbb410b4e05.css">
+    <link href="https://wellfound.com/wellfound.ico" rel="icon">
+    <link href="https://wellfound.com/wellfound-favicon-57x.png" rel="apple-touch-icon-precomposed" sizes="57x57">
+    <link href="https://wellfound.com/wellfound-favicon-72x.png" rel="apple-touch-icon-precomposed" sizes="72x72">
+    <link href="https://wellfound.com/wellfound-favicon-114x.png" rel="apple-touch-icon-precomposed" sizes="114x114">
+    <link href="https://wellfound.com/wellfound-favicon-144x.png" rel="apple-touch-icon-precomposed" sizes="144x144">
+
+    <link rel="stylesheet" media="screen" href="/webpack/wps.g.sitewide-6d8592e64a068bee4569.css">
+    <link rel="stylesheet" media="screen" href="/webpack/application-a27722c05c2f72f0ac2e.css">
+
+    <script>
+        //<![CDATA[
+        window._rollbarPerson = { "id": null, "username": null };
+        //]]>
+    </script>
+    <script>
+        //<![CDATA[
+        window.revision = "64960e55f5d5fc02176bcb87a31fabf71bbc6f44";
+        //]]>
+    </script>
+    <script>
+        //<![CDATA[
+        window.env = { "ROLLBAR_CLIENT_ACCESS_TOKEN": "f69b595298784373878a61a9fcb5e1a8", "ROLLBAR_CLIENT_ENVIRONMENT": "production_js" };
+        //]]>
+    </script>
+    <script>
+        //<![CDATA[
+        window.WEBPACK_PUBLIC_PATH = "/webpack/";
+        //]]>
+    </script>
+    <script>
+        //<![CDATA[
+        !function (r) { var e = {}; function n(o) { if (e[o]) return e[o].exports; var t = e[o] = { i: o, l: !1, exports: {} }; return r[o].call(t.exports, t, t.exports, n), t.l = !0, t.exports } n.m = r, n.c = e, n.d = function (r, e, o) { n.o(r, e) || Object.defineProperty(r, e, { enumerable: !0, get: o }) }, n.r = function (r) { "undefined" != typeof Symbol && Symbol.toStringTag && Object.defineProperty(r, Symbol.toStringTag, { value: "Module" }), Object.defineProperty(r, "__esModule", { value: !0 }) }, n.t = function (r, e) { if (1 & e && (r = n(r)), 8 & e) return r; if (4 & e && "object" == typeof r && r && r.__esModule) return r; var o = Object.create(null); if (n.r(o), Object.defineProperty(o, "default", { enumerable: !0, value: r }), 2 & e && "string" != typeof r) for (var t in r) n.d(o, t, function (e) { return r[e] }.bind(null, t)); return o }, n.n = function (r) { var e = r && r.__esModule ? function () { return r.default } : function () { return r }; return n.d(e, "a", e), e }, n.o = function (r, e) { return Object.prototype.hasOwnProperty.call(r, e) }, n.p = "", n(n.s = 7) }({ "6fAl": function (r, e, n) { n.p = window.WEBPACK_PUBLIC_PATH }, 7: function (r, e, n) { n("6fAl"), r.exports = n("dEEo") }, UXez: function (r, e, n) { r.exports = n.p + "c715fe022dddf3061b961c6f2e67df58.js" }, ZZmr: function (r, e) { var n, o; o = [], n = !1, window._eventQueueClear = function (r, e) { var t, l, a, i; if (n) throw new Error("_eventQueueClear only be invoked once"); for (n = !0, i = [], l = 0, a = o.length; l < a; l++)t = o[l], i.push(t(r, e)); return i }, window._q = function (r) { return n || this._eventQueueTriggered || (this._eventQueueTriggered = !0, r.preventDefault(), this.className += " loading", o.push((e = this, function (n, o) { return o.with(n(e).closest(o.rootSelector()), (function () { return n(e).removeClass("loading"), n(e).trigger(n.event.fix(r)) })) }))), !0; var e } }, dEEo: function (r, e, n) { n("xhrX"), n("ZZmr") }, pNgg: function (r, e) { (() => { "use strict"; var r = { 133: r => { function e(r, n) { this.impl = r(n, this), this.options = n, function (r) { for (var e = function (r) { return function () { var e = Array.prototype.slice.call(arguments, 0); if (this.impl[r]) return this.impl[r].apply(this.impl, e) } }, n = "log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleAnonymousErrors,handleUnhandledRejection,_createItem,wrap,loadFull,shimId,captureEvent,captureDomContentLoaded,captureLoad".split(","), o = 0; o < n.length; o++)r[n[o]] = e(n[o]) }(e.prototype) } e.prototype._swapAndProcessMessages = function (r, e) { var n, o, t; for (this.impl = r(this.options); n = e.shift();)o = n.method, t = n.args, this[o] && "function" == typeof this[o] && ("captureDomContentLoaded" === o || "captureLoad" === o ? this[o].apply(this, [t[0], n.ts]) : this[o].apply(this, t)); return this }, r.exports = e }, 424: r => { function e(r, e, n) { if (e.hasOwnProperty && e.hasOwnProperty("addEventListener")) { for (var o = e.addEventListener; o._rollbarOldAdd && o.belongsToShim;)o = o._rollbarOldAdd; var t = function (e, n, t) { o.call(this, e, r.wrap(n), t) }; t._rollbarOldAdd = o, t.belongsToShim = n, e.addEventListener = t; for (var l = e.removeEventListener; l._rollbarOldRemove && l.belongsToShim;)l = l._rollbarOldRemove; var a = function (r, e, n) { l.call(this, r, e && e._rollbar_wrapped || e, n) }; a._rollbarOldRemove = l, a.belongsToShim = n, e.removeEventListener = a } } r.exports = function (r, n, o) { if (r) { var t, l, a = "EventTarget,Window,Node,ApplicationCache,AudioTrackList,ChannelMergerNode,CryptoOperation,EventSource,FileReader,HTMLUnknownElement,IDBDatabase,IDBRequest,IDBTransaction,KeyOperation,MediaController,MessagePort,ModalWindow,Notification,SVGElementInstance,Screen,TextTrack,TextTrackCue,TextTrackList,WebSocket,WebSocketWorker,Worker,XMLHttpRequest,XMLHttpRequestEventTarget,XMLHttpRequestUpload".split(","); for (t = 0; t < a.length; ++t)r[l = a[t]] && r[l].prototype && e(n, r[l].prototype, o) } } }, 579: (r, e, n) => { var o = n(796), t = n(424); function l(r) { return function () { try { return r.apply(this, arguments) } catch (r) { try { console.error("[Rollbar]: Internal error", r) } catch (r) { } } } } var a = 0; function i(r, e) { this.options = r, this._rollbarOldOnError = null; var n = a++; this.shimId = function () { return n }, "undefined" != typeof window && window._rollbarShims && (window._rollbarShims[n] = { handler: e, messages: [] }) } var s = n(133), d = function (r, e) { return new i(r, e) }, u = function (r) { return new s(d, r) }; function c(r) { return l((function () { var e = Array.prototype.slice.call(arguments, 0), n = { shim: this, method: r, args: e, ts: new Date }; window._rollbarShims[this.shimId()].messages.push(n) })) } i.prototype.loadFull = function (r, e, n, o, t) { var a = !1, i = e.createElement("script"), s = e.getElementsByTagName("script")[0], d = s.parentNode; i.crossOrigin = "", i.src = o.rollbarJsUrl, n || (i.async = !0), i.onload = i.onreadystatechange = l((function () { if (!(a || this.readyState && "loaded" !== this.readyState && "complete" !== this.readyState)) { i.onload = i.onreadystatechange = null; try { d.removeChild(i) } catch (r) { } a = !0, function () { var e; if (void 0 === r._rollbarDidLoad) { e = new Error("rollbar.js did not load"); for (var n, o, l, a, i = 0; n = r._rollbarShims[i++];)for (n = n.messages || []; o = n.shift();)for (l = o.args || [], i = 0; i < l.length; ++i)if ("function" == typeof (a = l[i])) { a(e); break } } "function" == typeof t && t(e) }() } })), d.insertBefore(i, s) }, i.prototype.wrap = function (r, e, n) { try { var o; if (o = "function" == typeof e ? e : function () { return e || {} }, "function" != typeof r) return r; if (r._isWrap) return r; if (!r._rollbar_wrapped && (r._rollbar_wrapped = function () { n && "function" == typeof n && n.apply(this, arguments); try { return r.apply(this, arguments) } catch (n) { var e = n; throw e && ("string" == typeof e && (e = new String(e)), e._rollbarContext = o() || {}, e._rollbarContext._wrappedSource = r.toString(), window._rollbarWrappedError = e), e } }, r._rollbar_wrapped._isWrap = !0, r.hasOwnProperty)) for (var t in r) r.hasOwnProperty(t) && (r._rollbar_wrapped[t] = r[t]); return r._rollbar_wrapped } catch (e) { return r } }; for (var p = "log,debug,info,warn,warning,error,critical,global,configure,handleUncaughtException,handleAnonymousErrors,handleUnhandledRejection,captureEvent,captureDomContentLoaded,captureLoad".split(","), f = 0; f < p.length; ++f)i.prototype[p[f]] = c(p[f]); r.exports = { setupShim: function (r, e) { if (r) { var n = e.globalAlias || "Rollbar"; if ("object" == typeof r[n]) return r[n]; r._rollbarShims = {}, r._rollbarWrappedError = null; var a = new u(e); return l((function () { e.captureUncaught && (a._rollbarOldOnError = r.onerror, o.captureUncaughtExceptions(r, a, !0), e.wrapGlobalEventHandlers && t(r, a, !0)), e.captureUnhandledRejections && o.captureUnhandledRejections(r, a, !0); var l = e.autoInstrument; return !1 !== e.enabled && (void 0 === l || !0 === l || function (r) { return !("object" != typeof r || void 0 !== r.page && !r.page) }(l)) && r.addEventListener && (r.addEventListener("load", a.captureLoad.bind(a)), r.addEventListener("DOMContentLoaded", a.captureDomContentLoaded.bind(a))), r[n] = a, a }))() } }, Rollbar: u } }, 791: r => { r.exports = function (r) { return function (e) { if (!e && !window._rollbarInitialized) { for (var n, o, t = (r = r || {}).globalAlias || "Rollbar", l = window.rollbar, a = function (r) { return new l(r) }, i = 0; n = window._rollbarShims[i++];)o || (o = n.handler), n.handler._swapAndProcessMessages(a, n.messages); window[t] = o, window._rollbarInitialized = !0 } } } }, 796: r => { r.exports = { captureUncaughtExceptions: function (r, e, n) { if (r) { var o; if ("function" == typeof e._rollbarOldOnError) o = e._rollbarOldOnError; else if (r.onerror) { for (o = r.onerror; o._rollbarOldOnError;)o = o._rollbarOldOnError; e._rollbarOldOnError = o } e.handleAnonymousErrors(); var t = function () { var n = Array.prototype.slice.call(arguments, 0); !function (r, e, n, o) { r._rollbarWrappedError && (o[4] || (o[4] = r._rollbarWrappedError), o[5] || (o[5] = r._rollbarWrappedError._rollbarContext), r._rollbarWrappedError = null); var t = e.handleUncaughtException.apply(e, o); n && n.apply(r, o), "anonymous" === t && (e.anonymousErrorsPending += 1) }(r, e, o, n) }; n && (t._rollbarOldOnError = o), r.onerror = t } }, captureUnhandledRejections: function (r, e, n) { if (r) { "function" == typeof r._rollbarURH && r._rollbarURH.belongsToShim && r.removeEventListener("unhandledrejection", r._rollbarURH); var o = function (r) { var n, o, t; try { n = r.reason } catch (r) { n = void 0 } try { o = r.promise } catch (r) { o = "[unhandledrejection] error getting `promise` from event" } try { t = r.detail, !n && t && (n = t.reason, o = t.promise) } catch (r) { } n || (n = "[unhandledrejection] error getting `reason` from event"), e && e.handleUnhandledRejection && e.handleUnhandledRejection(n, o) }; o.belongsToShim = n, r._rollbarURH = o, r.addEventListener("unhandledrejection", o) } } } } }, e = {}; function n(o) { var t = e[o]; if (void 0 !== t) return t.exports; var l = e[o] = { exports: {} }; return r[o](l, l.exports, n), l.exports } var o = n(579), t = n(791); _rollbarConfig = _rollbarConfig || {}, _rollbarConfig.rollbarJsUrl = _rollbarConfig.rollbarJsUrl || "https://cdn.rollbar.com/rollbarjs/refs/tags/v2.26.5/rollbar.min.js", _rollbarConfig.async = void 0 === _rollbarConfig.async || _rollbarConfig.async; var l = o.setupShim(window, _rollbarConfig), a = t(_rollbarConfig); window.rollbar = o.Rollbar, l.loadFull(window, document, !_rollbarConfig.async, _rollbarConfig, a) })() }, xhrX: function (r, e, n) { window._rollbarConfig = { accessToken: window.env.ROLLBAR_CLIENT_ACCESS_TOKEN, captureUncaught: !0, captureUnhandledRejections: !1, globalAlias: "_alRollbar", rollbarJsUrl: n("UXez"), payload: { environment: window.env.ROLLBAR_CLIENT_ENVIRONMENT, client: { javascript: { code_version: window.revision, source_map_enabled: !0, guess_uncaught_frames: !0 } }, person: window._rollbarPerson }, filterTelemetry: function (r) { return "dom" === r.type && "input" === r.body.subtype }, checkIgnore: function (r, e, n) { var o, t, l, a, i, s, d, u, c, p, f, h, b, g, v, _, m, y, w, E, O; try { if ("development_js" === (null != n ? n.environment : void 0)) return !0; if (O = null != n && null != (p = n.client) && null != (f = p.javascript) ? f.browser : void 0, a = null != n && null != (h = n.body) && null != (b = h.trace) ? b.exception : void 0, s = null != n && null != (g = n.body) && null != (v = g.trace) && null != (_ = v.frames) && null != (m = _[0]) ? m.filename : void 0, r && a.rollbarIgnore) return !0; if (r && null != s && null != O && /Firefox/.test(O) && /^resource:\/\//.test(s)) return !0; for (i = 0, u = (o = [/Loading chunk [0-9]+ failed/, /atomicFindClose/, /Baiduspider/, /dataKeys/, /ApolloGraphQLError/, /ApolloNetworkError/, /Failed to fetch/, /fbq is not defined/, /ResizeObserver loop limit exceeded/, /Cannot read properties of null (reading '0')/, /Unexpected token < in JSON at position 0/, /performance is not defined/, /gcdemodata/, /bCapGloRef/, /sCapGloRef/]).length; i < u; i++)if (o[i].test(null != a ? a.message : void 0)) return !0; for (d = 0, c = (E = [/^http[s]?\:\/\/webcache\.googleusercontent\.com/, /^http[s]?\:\/\/web\.archive\.org/, /^http[s]?\:\/\/tunnelproxy\.nu/]).length; d < c; d++)if (E[d].test(null != n && null != (y = n.request) ? y.url : void 0)) return !0; return !!/NPObject/.test(null != a ? a.message : void 0) || (null != n && null != (w = n.client) ? w.runtime_ms : void 0) > 12e5 } catch (l) { return t = l, console.warn("Error while running Rollbar checkIgnore: " + (null != t ? t.message : void 0)), !1 } } }, n("pNgg") } });
+        //]]>
+    </script>
+    <script>
+        //<![CDATA[
+        window._mediaBreakpoints = [767, 959];
+        //]]>
+    </script>
+    <script src="/assets/bundles/head-38b3899f72f6be28f71c1d73aac5e536173f6db6b77e1ea4753d31403167ed28.js"></script>
+    <script>
+        window._alConfig = { "__APOLLO_SIGNATURE__": "1771945500-mQcHmYBQ9AO9HectguZ%2BJNmdkySl6n2MhWTOw6sFIqs%3D", "lib/environment": { "controller": "sessions", "action": "new", "environment": "production", "current_user": null }, "initializer": { "root_class": "_a", "template_name_data_key": "_tn", "javascript_module_exists_class": "_jm" }, "lib/partials": { "root_class": "_a" }, "segment/analytics": { "logging_enabled": false }, "application": { "js_templates": ["sessions/google_login_button", "sessions/login_with_password", "sessions/login", "sessions/new"], "image_host": "https://wellfound.com/images" } };
+    </script>
+    <script>
+        window._TIMEKIT_WIDGET_KEY = "live_widget_key_NDII8Ma6XFOcUHEZvIbMzDaBVtBn0eOg";
+    </script>
+    <script>
+        window._CLOUDFLARE_TURNSTILE_SITE_KEY = "0x4AAAAAAAgpA-Qx7SsJOW-g";
+    </script>
+    <script src="/webpack/application-4ac072aef67d15296896.js" async="async"></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=turnstileLoad" async="async"
+        defer="defer"></script>
+
+
+    <script charset="utf-8" src="/webpack/173-44a26feb0faad7cf632b.js"></script>
+    <script charset="utf-8" src="/webpack/52-c0cb9af907b38dea26ee.js"></script>
+    <script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script>
+</head>
+
+<body class="" id="layouts-base-body" _js-initialized="true">
+    <div class=" dir--sessions file--new _a _jm" data-_tn="sessions/new" _js-initialized="true">
+        <div class="wrapper">
+            <div class=" dir--sessions file--login _a _jm" data-_tn="sessions/login" _js-initialized="true">
+                <div class="login_container">
+                    <div class="main-wrapper">
+                        <div class="header">
+                            <div class="logo">
+                                <img width="120" alt=""
+                                    src="/assets/logo/rebrand/wellfound-0adbdc4bbe3303693ba4922f5cabd3c3b47ae77c81088f6610f550b28fb6d05f.svg">
+                            </div>
+                            <h1 class="headline">
+                                Login
+                            </h1>
+                            <p class="subtitle">
+                                Find the job made for you!
+                            </p>
+                        </div>
+                        <div class="content">
+                            <div class="social-signup hide-after-social-authentication">
+                                <div class="google_login_button dir--sessions file--google_login_button _a _jm"
+                                    data-_tn="sessions/google_login_button" _js-initialized="true"><a tabindex="-1"
+                                        ontouchstart="" class="u-unstyledLink"
+                                        href="/auth/google_oauth2/with_callback?callback=%2Fsessions%2Fcontinue_after_social_login%3Fprovider%3Dgoogle_oauth2&amp;sr=login"><button
+                                            class="u-fontSize14 social_button">
+                                            <img height="18" width="18" alt=""
+                                                src="/assets/shared/google-color-f4c1a8513bd15c69ec7ca579db2b03481fc853e34a4de63ceab61c6e7ec2c3c5.svg">
+                                            <span class="social_button_text">Log in with Google</span>
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="or-container">
+                                <div class="line"></div>
+                                <span>or Login with Email</span>
+                                <div class="line"></div>
+                            </div>
+                            <div class="sign-up-wrapper">
+                                <div class=" dir--sessions file--login_with_password _a _jm"
+                                    data-_tn="sessions/login_with_password" _js-initialized="true">
+                                    <form class="s-form" id="new_user" action="/login" accept-charset="UTF-8"
+                                        method="post"><input name="utf8" type="hidden" value="✓"
+                                            autocomplete="off"><input type="hidden" name="authenticity_token"
+                                            value="KV55SuF3aMjrSarN+nn3pxpOUJLWHjZLRMoZWxX790ilM/Mb2Gssn1XCRhi09aRyCxOixSHrwgC0ditdqP01ZQ=="
+                                            autocomplete="off"><input type="hidden" name="login_only" id="login_only"
+                                            value="true" autocomplete="off">
+
+                                        <input placeholder="Email" class="u-fontSize14 js-email" autofocus="autofocus"
+                                            type="email" value="" name="user[email]" id="user_email">
+                                        <div class="s-vgTop1_5">
+                                            <input placeholder="Password" class="u-fontSize14" type="password"
+                                                name="user[password]" id="user_password">
+                                        </div>
+                                        <div class="s-vgTop1_5 login-actions">
+                                            <input type="submit" name="commit" value="Log in"
+                                                class="c-button c-button--blue s-vgPadLeft1_5 s-vgPadRight1_5"
+                                                ontouchstart="" data-disable-with="Log in">
+                                            <a class="u-uncoloredLink u-colorGray6 s-vgLeft1 u-fontSize14 js-forgot_password"
+                                                href="/password/new">Forgot password?</a>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="not-registered">
+                                    <span>Not registered?</span>
+                                    <a href="/jobs/signup">Create an Account</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="aside-wrapper">
+                        <div class="top-background-image"></div>
+                        <div class="aside-text">
+                            <strong>Find the job made for you.</strong>
+                            <p>Browse over 130K jobs at top companies and fast-growing startups.</p>
+                        </div>
+                        <div class="bottom-background-image"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="fb-root"></div>
+    <div id="consent-banner" lang="en">
+        <style>
+            /* cyrillic-ext */
+            @font-face {
+                font-family: "Source Sans Pro";
+                font-style: normal;
+                font-display: swap;
+                font-weight: 400;
+                src: url(https://consent.trustarc.com/v2/asset/cyrillic-ext.woff2) format("woff2");
+                unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+            }
+
+            /* cyrillic */
+            @font-face {
+                font-family: "Source Sans Pro";
+                font-style: normal;
+                font-display: swap;
+                font-weight: 400;
+                src: url(https://consent.trustarc.com/v2/asset/cyrillic.woff2) format("woff2");
+                unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+            }
+
+            /* greek-ext */
+            @font-face {
+                font-family: "Source Sans Pro";
+                font-style: normal;
+                font-display: swap;
+                font-weight: 400;
+                src: url(https://consent.trustarc.com/v2/asset/greek-ext.woff2) format("woff2");
+                unicode-range: U+1F00-1FFF;
+            }
+
+            /* greek */
+            @font-face {
+                font-family: "Source Sans Pro";
+                font-style: normal;
+                font-display: swap;
+                font-weight: 400;
+                src: url(https://consent.trustarc.com/v2/asset/greek.woff2) format("woff2");
+                unicode-range: U+0370-03FF;
+            }
+
+            /* vietnamese */
+            @font-face {
+                font-family: "Source Sans Pro";
+                font-style: normal;
+                font-display: swap;
+                font-weight: 400;
+                src: url(https://consent.trustarc.com/v2/asset/vietnamese.woff2) format("woff2");
+                unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+            }
+
+            /* latin-ext */
+            @font-face {
+                font-family: "Source Sans Pro";
+                font-style: normal;
+                font-display: swap;
+                font-weight: 400;
+                src: url(https://consent.trustarc.com/v2/asset/latin-ext.woff2) format("woff2");
+                unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+            }
+
+            /* latin */
+            @font-face {
+                font-family: "Source Sans Pro";
+                font-style: normal;
+                font-display: swap;
+                font-weight: 400;
+                src: url(https://consent.trustarc.com/v2/asset/latin.woff2) format("woff2");
+                unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+            }
+
+            .trustarc-banner-content {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-pack: distribute;
+                -webkit-box-pack: justify;
+                justify-content: space-between;
+                width: 100%;
+                position: relative;
+            }
+
+            .trustarc-banner-wrapper {
+                position: relative;
+                line-height: normal;
+                font-size: 100%;
+                -webkit-text-size-adjust: 100%;
+                text-rendering: optimizeLegibility;
+                -moz-osx-font-smoothing: grayscale;
+                font-smoothing: antialiased;
+                -webkit-font-smoothing: antialiased;
+                text-shadow: rgba(0, 0, 0, 0.01) 0 0 1px;
+                font-variant-ligatures: none;
+                -webkit-font-variant-ligatures: none;
+                width: 100%;
+                display: block;
+                -webkit-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+                box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+                overflow: hidden;
+                font-family: "Source Sans Pro", sans-serif;
+            }
+
+            .trustarc-banner-wrapper * {
+                box-sizing: content-box;
+            }
+
+            .trustarc-banner-wrapper *:active {
+                -webkit-box-shadow: none !important;
+                box-shadow: none !important;
+                outline: none !important;
+            }
+
+            .trustarc-banner-wrapper {
+                -webkit-box-shadow: none !important;
+                box-shadow: none !important;
+            }
+
+            .trustarc-client-logo {
+                padding: 30px;
+            }
+
+            .trustarc-client-logo img {
+                -o-object-fit: contain;
+                object-fit: contain;
+                max-width: 214px;
+                max-height: 100%;
+            }
+
+            .trustarc-logo-container {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                justify-content: center;
+                height: 130px;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
+            }
+
+            .trustarc-banner-actions {
+                padding: 30px;
+                margin-right: 40px;
+            }
+
+            .trustarc-banner-actions>div {
+                width: 260px;
+            }
+
+            .trustarc-body-text,
+            .trustarc-warning-text {
+                font-size: 16px;
+            }
+
+            .trustarc-secondary-btn,
+            .trustarc-primary-btn,
+            .trustarc-acceptall-btn,
+            .trustarc-declineall-btn,
+            .trustarc-banner-close {
+                padding: 0;
+            }
+
+            .trustarc-primary-btn:hover,
+            .trustarc-secondary-btn:hover,
+            .trustarc-acceptall-btn:hover,
+            .trustarc-declineall-btn:hover {
+                opacity: 0.8;
+            }
+
+            .trustarc-banner-details {
+                padding: 30px 0px;
+                -webkit-box-flex: 1;
+                -ms-flex-positive: 1;
+                flex-grow: 1;
+            }
+
+            .trustarc-info-show {
+                color: #fff;
+                font-size: 16px;
+                background-color: #0a7be9;
+                -webkit-box-pack: justify;
+                -ms-flex-pack: justify;
+                justify-content: space-between;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                transition: opacity 400ms;
+            }
+
+            .trustarc-info-hide {
+                opacity: 0;
+                display: none;
+            }
+
+            .trustarc-info-img {
+                -ms-flex-item-align: center;
+                -ms-grid-row-align: center;
+                align-self: center;
+            }
+
+            .trustarc-banner-footer {
+                background-color: #f7f7f7;
+                min-height: 40px;
+                font-size: 12px;
+                border: none;
+                width: 100%;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-wrap: wrap;
+                flex-wrap: wrap;
+                -webkit-box-pack: justify;
+                -ms-flex-pack: justify;
+                justify-content: space-between;
+                line-height: 25px;
+                bottom: 0;
+            }
+
+            .trustarc-banner-right {
+                -ms-flex-item-align: center;
+                align-self: center;
+                padding-right: 20px;
+                justify-self: flex-end;
+                position: relative;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                border: 1px solid transparent;
+            }
+
+            .trustarc-banner-right :focus-visible {
+                border: 1px solid blue;
+            }
+
+            .trustarc-banner-left {
+                color: #0052CC;
+                cursor: pointer;
+                -ms-flex-item-align: center;
+                -ms-grid-row-align: center;
+                align-self: center;
+                padding: 5px;
+                text-decoration: underline;
+            }
+
+            .trustarc-banner-left:focus-visible {
+                outline: 1px solid;
+                text-decoration: underline;
+                padding: 2px;
+                border-radius: 3px;
+                background-color: white;
+                padding-block: 0;
+                padding-inline: 2px;
+                border: 1px dotted transparent;
+            }
+
+            .trustarc-banner-footer-left {
+                -ms-flex-item-align: center;
+                -ms-grid-row-align: center;
+                align-self: center;
+                text-align: left;
+                margin-left: 20px;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-wrap: wrap;
+                flex-wrap: wrap;
+                -webkit-box-flex: 1;
+                -ms-flex: 1;
+                flex: 1
+            }
+
+            .trustarc-btn-disabled {
+                opacity: 0.6;
+                filter: alpha(opacity=60);
+                cursor: default;
+            }
+
+            .trustarc-btn-disabled:hover {
+                opacity: 0.6;
+                filter: alpha(opacity=60);
+                cursor: default;
+            }
+
+            @media only screen and (min-width: 1px) and (max-width: 950px) {
+                .trustarc-banner-content {
+                    -ms-flex-wrap: wrap;
+                    flex-wrap: wrap;
+                }
+
+                .trustarc-banner-wrapper,
+                .trustarc-banner-content,
+                .trustarc-banner-details {
+                    text-align: center;
+                }
+
+                .trustarc-banner-details {
+                    padding: 0px 20px;
+                }
+
+                .trustarc-client-logo {
+                    width: 100%;
+                    padding: 50px 0px 20px;
+                }
+
+                .trustarc-banner-actions {
+                    display: -webkit-box;
+                    display: -ms-flexbox;
+                    display: flex;
+                    -webkit-box-pack: center;
+                    -ms-flex-pack: center;
+                    justify-content: center;
+                    width: 100%;
+                    margin: auto;
+                    padding: 10px 20px 20px 20px;
+                }
+
+                .trustarc-header-text {
+                    color: #000000;
+                    padding-bottom: 10px;
+                    font-size: 30px;
+                }
+
+                @media only screen and (min-width: 1px) and (max-width: 768px) {
+
+                    .trustarc-secondary-btn,
+                    .trustarc-primary-btn,
+                    .trustarc-acceptall-btn,
+                    .trustarc-declineall-btn {
+                        font-size: 18px !important;
+                    }
+
+                    .trustarc-banner-actions>div {
+                        width: 100%;
+                    }
+                }
+            }
+
+            .trustarc-background {
+                background-color: #FFFFFF;
+            }
+
+            .trustarc-header-text {
+                color: #000000;
+            }
+
+            .trustarc-body-text {
+                color: #000000;
+            }
+
+            .trustarc-banner-background {
+                background-color: #FFFFFF;
+            }
+
+            .trustarc-banner-header {
+                color: #000000;
+            }
+
+            .trustarc-banner-body {
+                color: #000000;
+            }
+
+            .trustarc-primary-btn {
+                color: #FFFFFF;
+                background-color: #064676;
+            }
+
+            .trustarc-secondary-btn {
+                color: #000000 !important;
+                background-color: #ffffff;
+            }
+
+            .trustarc-optin-btn {
+                color: #FFFFFF;
+                background-color: #007C2D;
+            }
+
+            .trustarc-optout-btn {
+                color: #FFFFFF;
+                background-color: #333333;
+            }
+
+            .trustarc-back-btn {
+                color: #000000 !important;
+                background-color: #FFFFFF;
+            }
+
+            .trustarc-acceptall-btn {
+                color: #FFFFFF;
+                background-color: #5EC323;
+            }
+
+            .trustarc-declineall-btn {
+                color: #000000;
+                background-color: #dcdcdc;
+            }
+
+            .trustarc-agree-btn {
+                color: #FFFFFF !important;
+                background-color: #064676;
+            }
+
+            .trustarc-reject-btn {
+                color: #000000 !important;
+                background-color: #DCDCDC;
+            }
+
+            .trustarc-two-step-background {
+                background-color: #FFFFFF;
+            }
+
+            .trustarc-two-step-body-text {
+                color: #000000;
+            }
+
+            .trustarc-two-step-opt-out-btn {
+                color: #000000;
+                background-color: #DCDCDC;
+            }
+
+            .trustarc-two-step-opt-in-btn {
+                color: #FFFFFF;
+                background-color: #064676;
+            }
+
+            .trustarc-two-step-back-btn {
+                color: #000000;
+                background-color: #DCDCDC;
+            }
+
+            /* stylelint-disable declaration-no-important */
+            /* stylelint-disable angellist/halo-flex */
+            /*Those are the CSS overrides for the TrustArc Consent Manager.*/
+            /* Make sure Help Scout Beacon is behind the TrustArc banner */
+            .hsds-beacon .BeaconFabButtonFrame {
+                bottom: 15px !important;
+            }
+
+            /* Make sure HotJar surveys are behind the TrustArc banner */
+            ._hj-widget-container div {
+                z-index: 1100 !important;
+            }
+
+            @media screen and (min-width: 650px) {
+                ._hj-widget-container .css-16inonf {
+                    right: 124px !important;
+                }
+            }
+
+            /* Default font for everything */
+            #consent-banner,
+            #overlay-page {
+                font-family: Graphik, Helvetica Neue, arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji !important;
+            }
+
+            /*Banner design*/
+            #consent-banner .trustarc-banner-content {
+                border-top: 3px solid #210d25;
+            }
+
+            #consent-banner .trustarc-banner-footer,
+            #consent-banner .trustarc-logo-container {
+                display: none !important;
+            }
+
+            @media only screen and (min-width: 1px) and (max-width: 950px) {
+                #consent-banner .trustarc-client-logo {
+                    padding: 0px !important;
+                }
+
+                #consent-banner .trustarc-banner-actions {
+                    padding: 5px !important;
+                }
+            }
+
+            #consent-banner .trustarc-banner-header {
+                font-size: 24px !important;
+            }
+
+            #consent-banner .trustarc-banner-details {
+                padding: 20px 0 !important;
+            }
+
+            /* Display banner on bottom of page */
+            #consent-banner .trustarc-banner-wrapper {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                z-index: 1200;
+                border-top: 10px;
+            }
+
+            /* Button design */
+            .trustarc-secondary-btn,
+            .trustarc-primary-btn,
+            .trustarc-acceptall-btn,
+            .trustarc-declineall-btn {
+                font-size: 14px !important;
+                border-radius: 4px !important;
+                height: 35px !important;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            #consent-banner .trustarc-acceptall-btn,
+            #consent-banner .trustarc-declineall-btn,
+            #consent-banner .trustarc-secondary-btn {
+                margin-top: 0 !important;
+                border-color: #0e1111 !important;
+            }
+
+            /* Accept all and decline all buttons */
+            #consent-banner .trustarc-acceptall-btn,
+            #consent-banner .trustarc-declineall-btn {
+                background-color: #0e1111 !important;
+                color: #fff !important;
+            }
+
+            #consent-banner .trustarc-acceptall-btn:hover,
+            #consent-banner .trustarc-declineall-btn:hover {
+                background-color: #143fcc !important;
+                border-color: #143fcd !important;
+                opacity: 1 !important;
+            }
+
+            /* Submit all preferences button */
+            #consent-banner .trustarc-secondary-btn {
+                background-color: #fff !important;
+                color: #0e1111 !important;
+            }
+
+            #consent-banner .trustarc-secondary-btn:hover {
+                background-color: #eaebff !important;
+                color: #143fcd !important;
+                border-color: #143fcd !important;
+            }
+
+            #consent-banner .trustarc-agree-btn {
+                margin-right: 15px;
+                margin-left: 15px;
+            }
+
+            @media only screen and (min-width: 1px) and (max-width: 950px) {
+                #consent-banner .trustarc-agree-btn {
+                    margin-right: 5px;
+                    margin-left: 5px;
+                }
+            }
+
+            #consent-banner .trustarc-banner-actions {
+                align-items: center;
+                display: flex;
+                padding: 0 30px;
+            }
+
+            #consent-banner .trustarc-banner-actions>div {
+                width: 100% !important;
+                display: flex !important;
+                flex-direction: row !important;
+                white-space: nowrap !important;
+            }
+
+            /* Required on the Monolith */
+            #consent-banner .trustarc-banner-actions button {
+                white-space: nowrap !important;
+            }
+
+            #consent-banner .trustarc-banner-close {
+                padding: 0 !important;
+            }
+
+            #consent-banner .trustarc-body-text,
+            #consent-banner .trustarc-header-text,
+            #consent-banner button {
+                font-size: 14px !important;
+            }
+
+            /*Overlay design*/
+            #overlay-page .trustarc-acceptall-btn,
+            #overlay-page .trustarc-declineall-btn,
+            #overlay-page .trustarc-primary-btn,
+            #overlay-page .trustarc-secondary-btn {
+                border-color: #0e1111 !important;
+            }
+
+            /* Accept all and decline all buttons */
+            #overlay-page .trustarc-acceptall-btn,
+            #overlay-page .trustarc-declineall-btn {
+                background-color: #0e1111 !important;
+                color: #fff !important;
+            }
+
+            #overlay-page .trustarc-acceptall-btn:hover,
+            #overlay-page .trustarc-declineall-btn:hover {
+                background-color: #143fcc !important;
+                border-color: #143fcd !important;
+                opacity: 1 !important;
+            }
+
+            /* Submit all preferences button */
+            #overlay-page .trustarc-secondary-btn {
+                background-color: #fff !important;
+                color: #0e1111 !important;
+            }
+
+            #overlay-page .trustarc-secondary-btn:hover {
+                background-color: #eaebff !important;
+                color: #143fcd !important;
+                border-color: #143fcd !important;
+            }
+
+            #overlay-page .bucket-panel .trustarc-primary-btn {
+                background-color: #fff !important;
+                color: #0e1111 !important;
+            }
+
+            #overlay-page .bucket-panel .trustarc-primary-btn:hover {
+                background-color: #eaebff !important;
+                color: #143fcd !important;
+                border-color: #143fcd !important;
+            }
+
+            #overlay-page .vendor-panel .trustarc-primary-btn {
+                background-color: #0e1111 !important;
+                color: #fff !important;
+            }
+
+            #overlay-page .vendor-panel .trustarc-primary-btn:hover {
+                background-color: #143fcc !important;
+                border-color: #143fcd !important;
+                opacity: 1 !important;
+            }
+
+            #overlay-page .ta-footer-bottom {
+                background-color: #fff !important;
+            }
+
+            #overlay-page .trustarc-body-text {
+                font-size: 14px !important;
+            }
+
+            #overlay-page .client-logo {
+                display: none !important;
+            }
+
+            /* Hides the Powered by */
+            #overlay-page .f-right {
+                color: #fff !important;
+            }
+
+            /* Bring TrustArc logo higher up */
+            #overlay-page .ta-footer-top {
+                padding-bottom: 10px !important;
+            }
+        </style>
+        <div id="truste-consent-track" class="trustarc-banner-wrapper trustarc-banner-background trustarc-background"
+            style="overflow: auto; opacity: 1; display: block; transition: opacity 350ms;" role="dialog"
+            aria-modal="true" aria-label="Cookie Consent Banner">
+            <div id="trustarc-info" class="trustarc-info-hide">
+                <div class="trustarc-info-img" style="margin: 14px 6px 14px 26px;" aria-hidden="true"> <img
+                        src="https://consent.trustarc.com/v2/asset/ic-error.svg" alt="alert icon"> </div>
+                <div tabindex="0" id="truste-repop-msg" class="trustarc-warning-text" style="margin: 14px;"></div>
+                <div class="trustarc-info-img" style="margin: 14px 26px 14px 6px;"> <a id="truste-repop-msg-close"
+                        role="button" style="cursor: pointer;" tabindex="0" aria-label="alert message close"> <img
+                            src="https://consent.trustarc.com/v2/asset/ic-close-white.svg" alt="alert message close"
+                            style="width: 14px; height: 14px;"> </a> </div>
+            </div>
+            <div id="trustarc-clear-cookie-info" class="trustarc-info-hide">
+                <div class="trustarc-info-img" style="margin: 14px 6px 14px 26px;" aria-hidden="true"> <img
+                        src="https://consent.trustarc.com/v2/asset/ic-error.svg" alt="alert icon"> </div>
+                <div tabindex="0" id="truste-clear-cookie-msg" class="trustarc-warning-text" style="margin: 14px;">
+                </div>
+                <div class="trustarc-info-img" style="margin: 14px 26px 14px 6px;"> <a
+                        id="truste-clear-cookie-msg-close" role="button" style="cursor: pointer;" tabindex="0"
+                        aria-label="alert message close"> <img
+                            src="https://consent.trustarc.com/v2/asset/ic-close-white.svg" alt="alert message close"
+                            style="width: 14px; height: 14px;"> </a> </div>
+            </div>
+            <div class="trustarc-banner-content" id="truste-consent-content">
+                <div class="trustarc-client-logo"> <a tabindex="0" class="trustarc-banner-close"
+                        id="truste-consent-close" role="button"
+                        style="position:absolute;right:0;top:0;margin:13px;padding:13px;cursor:pointer;"
+                        aria-label="close banner"> <img src="https://consent.trustarc.com/v2/asset/ic-close.svg"
+                            alt="close banner" width="14px" height="14px"> </a>
+                    <div class="trustarc-logo-container" style="visibility: hidden;"> <img alt="company logo"
+                            id="truste-banner-logo" width="auto" height="auto" style="height: 0px;"> </div>
+                </div>
+                <div class="trustarc-banner-details">
+                    <div id="truste-header-text" class="trustarc-banner-header trustarc-header-text"
+                        style="font-size:42px;font-kerning:normal;font-weight:bold;"> <span style="font-weight:bolder;"
+                            role="heading" aria-level="2">WE VALUE YOUR PRIVACY</span> </div>
+                    <div id="truste-consent-text" class="trustarc-banner-body trustarc-body-text"> This site uses
+                        cookies and related technologies, as described in our privacy policy, for purposes that may
+                        include site operation, analytics, enhanced user experience, or advertising. You may choose to
+                        consent to our use of these technologies, or manage your own preferences. </div>
+                </div>
+                <div class="trustarc-banner-actions">
+                    <div id="truste-consent-buttons"> <button tabindex="0" type="button" role="button"
+                            class="trustarc-secondary-btn" id="truste-show-consent"
+                            style="font-weight:600;margin-top:10px;height:50px;width:100%;font-size:22px;border: 1px solid #eee;border-radius:4px;cursor:pointer;color:#000;font-family:&quot;Source Sans Pro&quot;, sans-serif;">Manage
+                            choices</button> <button tabindex="0" type="button" role="button"
+                            class="trustarc-primary-btn trustarc-acceptall-btn trustarc-agree-btn"
+                            id="truste-consent-button"
+                            style="font-weight:600;margin-top:10px;height:50px;width:100%;font-size:22px;border: 1px solid #eee;border-radius:4px;cursor:pointer;color:#000;font-family:&quot;Source Sans Pro&quot;, sans-serif;">Agree
+                            &amp; Proceed</button> <button tabindex="0" type="button" role="button"
+                            class="trustarc-declineall-btn trustarc-reject-btn" id="truste-consent-required"
+                            style="display: block; opacity: 1; font-weight: 600; margin-top: 10px; height: 50px; width: 100%; font-size: 22px; border: 1px solid rgb(238, 238, 238); border-radius: 4px; cursor: pointer; color: rgb(0, 0, 0); font-family: &quot;Source Sans Pro&quot;, sans-serif; transition: opacity 350ms;">Reject
+                            All</button> </div>
+                </div>
+            </div>
+            <div class="trustarc-banner-footer">
+                <div class="trustarc-banner-footer-left" id="trustarc-footer-links-container"> <a tabindex="0"
+                        class="trustarc-banner-left" id="truste-privacy-button" target="_blank" rel="noopener"
+                        aria-label="Privacy Policy" style="display: none;">Privacy Policy</a> </div>
+                <div class="trustarc-banner-right"> <span style="align-self: center;">Powered by:</span> <a
+                        href="https://trustarc.com" target="_blank" rel="noopener" id="truste-powered-by" tabindex="0"
+                        aria-label="trustarc"> <img src="https://consent.trustarc.com/v2/asset/trustarc-logo-xs.svg"
+                            style="margin-bottom:7px;padding-left:5px;padding-top:10px;image-rendering:auto;image-rendering:crisp-edges;image-rendering:pixelated;width:70px;height:16px;"
+                            alt="TrustArc logo"> </a> </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div
+        style="position: fixed; inset: 0px; background-color: rgba(0, 0, 0, 0.7); border: 1px solid grey; z-index: 10000; display: none;">
+        <p style="color: white; text-align: center; margin-top: 50vh;">One more step before you proceed...</p>
+        <div style="display: flex; flex-wrap: nowrap; align-items: center; justify-content: center;"
+            id="turnstile_widget"></div>
+    </div>
+</body>
+
+</html>

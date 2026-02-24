@@ -1,7 +1,8 @@
 import sys
 from PySide6.QtWidgets import QApplication
 from ui.gui import JobSearchWindow
-from scrapers.indeed_scraper import scrape_jobs
+from scrapers.indeed_scraper import start_indeed_scraper
+from pprint import pprint
 
 def handle_job_search(job_title):
     """Called when user clicks search in GUI"""
@@ -9,10 +10,11 @@ def handle_job_search(job_title):
     
     try:
         # Call your backend scraper
-        jobs = scrape_jobs(job_title)
+        jobs = start_indeed_scraper(job_title)
         print('scraping done')
     except Exception as e:
         print(f"Automation failed, please check error logs")
+        pprint(e)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

@@ -27,9 +27,35 @@ No. Sometimes job listings are more of a "wish list" than actual requirements fo
 | LinkedIn Jobs | ❌ Not Implemented Yet |
 | Wellfound | ❌ Not Implemented Yet |
 
-# Credentials you need to provide for this to work
+# How to run the project(currently work in progress/beta)
 
-- You will need to log in to each of these websites using the provided browser.
-- Many of these websites only allow access (scraping) when you are logged in (LinkedIn, for example).
-- This is safe: data will be stored locally and the folder containing it won't be pushed to GitHub.
-- OpenAI API key (to better rank the skills).
+1. Clone repo
+```bash
+git clone https://github.com/Jhonatan-de-Souza/Job-Skills-Aggregator.git
+```
+
+2. Install requirements
+```python
+pip install requirements.txt
+```
+3. run src/main.py file
+```python
+python .\src\main.py
+```
+
+# Tech stack
+
+**Language & Framework:**
+- Python 3.12
+- PySide6 - Qt framework for GUI
+
+**Web Scraping:**
+- Playwright - Modern browser automation (synchronous API)
+- SeleniumBase - Undetected Chrome for anti-detection
+
+**Database:**
+- SQLite3 - Lightweight database for storing job data
+
+**Visualization**
+- Seaborn - Data visualization(not yet implemented)
+

@@ -1,19 +1,13 @@
 from playwright.sync_api import sync_playwright, Page
 from seleniumbase import sb_cdp
 from time import sleep
-from dataclasses import dataclass
+from utils.data_classes import Job
 from typing import List
 from database.database import create_tables, save_jobs
 import random
 import re
 
-@dataclass
-class Job:
-    title: str
-    description: str
-    website: str = "Indeed"
-    
-    
+
 def scrape_jobs_on_current_page(page:Page,job_title:str) -> List[Job]:
     job_search_field = page.get_by_role('combobox',name='search: Job title, keywords, or company')
     job_search_field.click()

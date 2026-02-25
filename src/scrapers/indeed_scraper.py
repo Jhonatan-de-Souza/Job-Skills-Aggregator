@@ -1,10 +1,11 @@
 from playwright.sync_api import sync_playwright, Page
 from seleniumbase import sb_cdp
 from time import sleep
-from src.data.models import Job
+from data.models import Job
 from typing import List
 from database.database import create_tables, save_jobs
 import random
+from utils.helper_functions import sleep_random
 
 
 def scrape_jobs_on_current_page(page:Page,job_title:str) -> List[Job]:
@@ -18,28 +19,31 @@ def scrape_jobs_on_current_page(page:Page,job_title:str) -> List[Job]:
     job_listings = page.locator("td.resultContent")
     listings_count = job_listings.count()
     
-    for job_index in range(listings_count):
-        sleep(random.randint(4,6))
-        
-        current_job = page.locator("td.resultContent").nth(job_index)
-        
-        current_job.scroll_into_view_if_needed()
-        
-        job_title = str(current_job.locator("h2.jobTitle span").text_content())
-        print(f"Scraping job number {job_index+1} of {listings_count}")
-        print(f"📄 Scraping job: {job_title}")
-        # Clicking updates the right pane — no page navigation occurs
-        current_job.locator("a[data-jk]").click()
-        sleep(random.randint(2,4))
-        
-        # Wait for the right pane to update with the new description
-        page.locator("#jobDescriptionText").wait_for(state="visible", timeout=15000)
-        job_description = str(page.locator("#jobDescriptionText").text_content())
-        
-        jobs.append(Job(title=job_title, description=job_description))
+    try:
+        for job_index in range(listings_count):
+            sleep_random(4,6)
+            
+            current_job = page.locator("td.resultContent").nth(job_index)
+            
+            current_job.scroll_into_view_if_needed()
+            
+            job_title = str(current_job.locator("h2.jobTitle span").text_content())
+            print(f"Scraping job number {job_index+1} of {listings_count}")
+            print(f"📄 Scraping job: {job_title}")
+
+            current_job.locator("a[data-jk]").click()
+            sleep_random(4,6)
+            
+            page.locator("#jobDescriptionText").wait_for(state="visible", timeout=15000)
+            job_description = str(page.locator("#jobDescriptionText").text_content())
+            
+            jobs.append(Job(title=job_title, description=job_description))
+                
+    except Exception as error:
+        print(error)
     
     return jobs
-    
+        
 
 def start_indeed_scraper(job_title:str):
     sb = sb_cdp.Chrome(headless=False, args=["--start-maximized"])
@@ -53,7 +57,7 @@ def start_indeed_scraper(job_title:str):
         if context.pages:
             page = context.pages[0]
         else:
-            context.new_page()
+            page = context.new_page()
             
         page.set_default_timeout(30000) 
         page.set_default_navigation_timeout(60000)

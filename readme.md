@@ -38,10 +38,35 @@ git clone https://github.com/Jhonatan-de-Souza/Job-Skills-Aggregator.git
 ```python
 pip install requirements.txt
 ```
-3. run src/main.py file
+3. Install google chrome(not needs for playwright but seleniumbase needs it)
+
+4. run src/main.py file
 ```python
 python .\src\main.py
 ```
+## Project architecture
+
+This project follows a simple layered (clean) architecture so each part is easy to understand, test and replace. Below is the folder structure and a short description of what each folder contains and does.
+
+Structure (compact):
+
+```
+src/
+├─ scrapers/        # site-specific scrapers and automation (Playwright + SeleniumBase)
+├─ data/            # domain models (dataclasses) e.g. Job
+├─ database/        # sqlite helpers, schema creation, save functions
+├─ ui/              # PySide6 GUI components (windows, widgets)
+├─ utils/           # small reusable helpers (sleep_random, formatters)
+└─ visualization/   # plotting/dashboard code (seaborn, charts)
+└─ tests/           # application tests
+└─ html/            # static HTML fixtures used during development and tests
+
+.env/                # virtual environment (not committed)
+readme.md            # this file — overview and run instructions
+requirements.txt     # Python dependencies (Playwright, PySide6, etc.)
+```
+
+Why this layout? Each folder maps to a single responsibility (UI, scraping, data, persistence, helpers). That makes it easier to test units in isolation and update a single concern when requirements change.
 
 # Tech stack
 
@@ -59,3 +84,20 @@ python .\src\main.py
 **Visualization**
 - Seaborn - Data visualization(not yet implemented)
 
+## FAQ
+
+<details>
+<summary>The scraper stopped working on X site</summary>
+
+html on mordern website changes fast, if you don't see a recent commit, there a chance the locators are used are not longer valid and need to be updated.
+
+</details>
+
+<details>
+<summary>I want to contribute, how can I do that?</summary>
+Just open a PR and I'll review it when i get a chance. Please make sure you don't try to push AI slop into the codebase:
+<br>
+<br>
+I use AI too, but try to review the code you push and avoid 3000 lines of comments in your code(llms love this)
+
+</details>

@@ -1,7 +1,23 @@
-from PySide6.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox
-from PySide6.QtCore import Qt, QPropertyAnimation, QEasingCurve, QSize
-from PySide6.QtGui import QFont, QColor
 from PySide6.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox, QGraphicsDropShadowEffect
+from PySide6.QtCore import Qt, QThread, Signal
+from PySide6.QtGui import QFont, QColor
+
+
+class ScraperThread(QThread):
+    finished = Signal()
+    error = Signal(str)
+
+    def __init__(self, callback, job_title):
+        super().__init__()
+        self._callback = callback
+        self._job_title = job_title
+
+    def run(self):
+        try:
+            self._callback(self._job_title)
+            self.finished.emit()
+        except Exception as e:
+            self.error.emit(str(e))
 
 class JobSearchWindow(QMainWindow):
     def __init__(self, callback=None):
@@ -26,7 +42,7 @@ class JobSearchWindow(QMainWindow):
         
         # Title label
         title_label = QLabel("🔍 Find Your Job")
-        title_font = QFont("Segoe UI", 28, QFont.Bold)
+        title_font = QFont("SF Pro Display", 28, QFont.Bold)
         title_label.setFont(title_font)
         title_label.setAlignment(Qt.AlignCenter)
         title_label.setObjectName("title")
@@ -34,7 +50,7 @@ class JobSearchWindow(QMainWindow):
         
         # Subtitle
         subtitle_label = QLabel("Search millions of job listings")
-        subtitle_font = QFont("Segoe UI", 11)
+        subtitle_font = QFont("SF Pro Display", 11)
         subtitle_label.setFont(subtitle_font)
         subtitle_label.setAlignment(Qt.AlignCenter)
         subtitle_label.setObjectName("subtitle")
@@ -44,7 +60,7 @@ class JobSearchWindow(QMainWindow):
         
         # Job title label
         job_label = QLabel("Job Title")
-        job_font = QFont("Segoe UI", 13, QFont.Bold)
+        job_font = QFont("SF Pro Display", 13, QFont.Bold)
         job_label.setFont(job_font)
         job_label.setObjectName("label")
         layout.addWidget(job_label)
@@ -54,7 +70,7 @@ class JobSearchWindow(QMainWindow):
         self.job_entry.setPlaceholderText("e.g., Software Engineer, Data Scientist")
         self.job_entry.setMinimumHeight(48)
         self.job_entry.setObjectName("input_field")
-        entry_font = QFont("Segoe UI", 12)
+        entry_font = QFont("SF Pro Display", 12)
         self.job_entry.setFont(entry_font)
         
         # Add shadow effect to input
@@ -72,7 +88,7 @@ class JobSearchWindow(QMainWindow):
         search_button = QPushButton("Search")
         search_button.setMinimumHeight(48)
         search_button.setObjectName("search_button")
-        button_font = QFont("Segoe UI", 14, QFont.Bold)
+        button_font = QFont("SF Pro Display", 14, QFont.Bold)
         search_button.setFont(button_font)
         search_button.setCursor(Qt.PointingHandCursor)
         
@@ -88,7 +104,7 @@ class JobSearchWindow(QMainWindow):
         
         # Footer
         footer_label = QLabel("Powered by Job Scraper")
-        footer_font = QFont("Segoe UI", 10)
+        footer_font = QFont("SF Pro Display", 10)
         footer_label.setFont(footer_font)
         footer_label.setAlignment(Qt.AlignCenter)
         footer_label.setObjectName("footer")
@@ -178,22 +194,28 @@ class JobSearchWindow(QMainWindow):
     def on_search_click(self):
         """Handle search button click with animation"""
         job_title = self.job_entry.text().strip()
-        
+
         if not job_title:
             self.show_error_message("Error", "Please enter a job title")
             return
-        
-        # Disable button while searching
+
         sender = self.sender()
         sender.setEnabled(False)
         sender.setText("Searching...")
-        
-        try:
-            if self.callback:
-                self.callback(job_title)
-        finally:
-            sender.setEnabled(True)
-            sender.setText("Search")
+
+        self._thread = ScraperThread(self.callback, job_title)
+        self._thread.finished.connect(lambda: self._on_scraping_finished(sender))
+        self._thread.error.connect(lambda err: self._on_scraping_error(sender, err))
+        self._thread.start()
+
+    def _on_scraping_finished(self, button):
+        button.setEnabled(True)
+        button.setText("Search")
+
+    def _on_scraping_error(self, button, error):
+        button.setEnabled(True)
+        button.setText("Search")
+        self.show_error_message("Error", error)
     
     def show_error_message(self, title, message):
         """Show error message with Reddit styling"""

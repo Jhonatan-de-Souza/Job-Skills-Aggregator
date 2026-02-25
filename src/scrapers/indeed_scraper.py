@@ -14,10 +14,11 @@ def scrape_jobs_on_current_page(page:Page,job_title:str) -> List[Job]:
     job_search_field.clear()
     job_search_field.type(job_title)
     page.get_by_role('button',name='Achar vagas').click()
-    
     jobs = []
+    page.locator("td.resultContent").first.wait_for(state='visible')
     job_listings = page.locator("td.resultContent")
     listings_count = job_listings.count()
+    print(f'found {listings_count} job listings')
     
     try:
         for job_index in range(listings_count):

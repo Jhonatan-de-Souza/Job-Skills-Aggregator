@@ -1,0 +1,15 @@
+# Help GitHub Linguist detect the project's primary language
+*.py linguist-language=Python
+*.pyw linguist-language=Python
+*.pyi linguist-language=Python
+*.ipynb linguist-language=Python
+
+# Treat the virtual environment and other vendored folders as vendored
+jhonatan/** linguist-vendored
+
+# Mark documentation files as documentation
+README.md linguist-documentation
+readme.md linguist-documentation
+
+# Normalize Python line endings
+*.py text eol=lf

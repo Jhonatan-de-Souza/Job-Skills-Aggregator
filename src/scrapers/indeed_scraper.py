@@ -1,11 +1,10 @@
 from playwright.sync_api import sync_playwright, Page
 from seleniumbase import sb_cdp
 from time import sleep
-from utils.data_classes import Job
+from src.data.models import Job
 from typing import List
 from database.database import create_tables, save_jobs
 import random
-import re
 
 
 def scrape_jobs_on_current_page(page:Page,job_title:str) -> List[Job]:

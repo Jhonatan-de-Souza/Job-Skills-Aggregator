@@ -24,7 +24,15 @@ def create_tables():
 
 def save_jobs(jobs: list):
     with get_connection() as conn:
-        conn.executemany(
-            "INSERT INTO jobs (title, description) VALUES (?, ?)",
-            [(job.title, job.description) for job in jobs]
-        )
+        cursor = conn.cursor()
+        for job in jobs:
+            cursor.execute(
+                "SELECT id FROM jobs WHERE description = ?",
+                (job.description,)
+            )
+            if cursor.fetchone() is None:
+                cursor.execute(
+                    "INSERT INTO jobs (title, description) VALUES (?, ?)",
+                    (job.title, job.description)
+                )
+        conn.commit()

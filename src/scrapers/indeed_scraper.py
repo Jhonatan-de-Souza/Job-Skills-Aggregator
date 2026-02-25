@@ -19,7 +19,7 @@ def scrape_jobs_on_current_page(page:Page,job_title:str) -> List[Job]:
     listings_count = job_listings.count()
     
     for job_index in range(listings_count):
-        sleep(random.randint(2,4))
+        sleep(random.randint(4,6))
         
         current_job = page.locator("td.resultContent").nth(job_index)
         

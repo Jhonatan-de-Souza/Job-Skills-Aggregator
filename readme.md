@@ -61,9 +61,11 @@ src/
 └─ tests/           # application tests
 └─ html/            # static HTML fixtures used during development and tests
 
-.env/                # virtual environment (not committed)
-readme.md            # this file — overview and run instructions
-requirements.txt     # Python dependencies (Playwright, PySide6, etc.)
+.claude/skills      # claude skills definitions (not committed)
+agents.md           # documentation for agents and how to use them(not committed)
+.env/               # virtual environment variables (not committed)
+readme.md           # this file — overview and run instructions
+requirements.txt    # Python dependencies (Playwright, PySide6, etc.)
 ```
 
 Why this layout? Each folder maps to a single responsibility (UI, scraping, data, persistence, helpers). That makes it easier to test units in isolation and update a single concern when requirements change.

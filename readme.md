@@ -38,7 +38,7 @@ git clone https://github.com/Jhonatan-de-Souza/Job-Skills-Aggregator.git
 ```python
 pip install requirements.txt
 ```
-3. Install google chrome(not needs for playwright but seleniumbase needs it)
+3. Install google chrome(not needed for playwright but seleniumbase needs it)
 
 4. run src/main.py file
 ```python

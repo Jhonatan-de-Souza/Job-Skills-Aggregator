@@ -46,7 +46,7 @@ python .\src\main.py
 ```
 ## Project architecture
 
-This project follows a simple layered (clean) architecture so each part is easy to understand, test and replace. Below is the folder structure and a short description of what each folder contains and does.
+This project follows a simple layered (clean) architecture so each part is easy to understand, test and replace.
 
 Structure (compact):
 

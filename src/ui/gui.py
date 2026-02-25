@@ -23,7 +23,7 @@ class JobSearchWindow(QMainWindow):
     def __init__(self, callback=None):
         super().__init__()
         self.callback = callback
-        self.setWindowTitle("Job Search - Reddit Style")
+        self.setWindowTitle("Job Skills Scraper")
         self.setGeometry(100, 100, 500, 400)
         self.setMinimumWidth(500)
         self.setMinimumHeight(400)
@@ -42,25 +42,25 @@ class JobSearchWindow(QMainWindow):
         
         # Title label
         title_label = QLabel("🔍 Find Your Job")
-        title_font = QFont("SF Pro Display", 28, QFont.Bold)
+        title_font = QFont("Helvetica", 28, QFont.Bold)
         title_label.setFont(title_font)
         title_label.setAlignment(Qt.AlignCenter)
         title_label.setObjectName("title")
         layout.addWidget(title_label)
         
         # Subtitle
-        subtitle_label = QLabel("Search millions of job listings")
-        subtitle_font = QFont("SF Pro Display", 11)
+        subtitle_label = QLabel("Search multiple jobs listings")
+        subtitle_font = QFont("Helvetica", 11)
         subtitle_label.setFont(subtitle_font)
         subtitle_label.setAlignment(Qt.AlignCenter)
         subtitle_label.setObjectName("subtitle")
         layout.addWidget(subtitle_label)
         
-        layout.addSpacing(20)
+        layout.addSpacing(10)
         
         # Job title label
         job_label = QLabel("Job Title")
-        job_font = QFont("SF Pro Display", 13, QFont.Bold)
+        job_font = QFont("Helvetica", 13, QFont.Bold)
         job_label.setFont(job_font)
         job_label.setObjectName("label")
         layout.addWidget(job_label)
@@ -70,7 +70,7 @@ class JobSearchWindow(QMainWindow):
         self.job_entry.setPlaceholderText("e.g., Software Engineer, Data Scientist")
         self.job_entry.setMinimumHeight(48)
         self.job_entry.setObjectName("input_field")
-        entry_font = QFont("SF Pro Display", 12)
+        entry_font = QFont("Helvetica", 12)
         self.job_entry.setFont(entry_font)
         
         # Add shadow effect to input
@@ -88,7 +88,7 @@ class JobSearchWindow(QMainWindow):
         search_button = QPushButton("Search")
         search_button.setMinimumHeight(48)
         search_button.setObjectName("search_button")
-        button_font = QFont("SF Pro Display", 14, QFont.Bold)
+        button_font = QFont("Helvetica", 14, QFont.Bold)
         search_button.setFont(button_font)
         search_button.setCursor(Qt.PointingHandCursor)
         
@@ -103,8 +103,8 @@ class JobSearchWindow(QMainWindow):
         layout.addWidget(search_button)
         
         # Footer
-        footer_label = QLabel("Powered by Job Scraper")
-        footer_font = QFont("SF Pro Display", 10)
+        footer_label = QLabel("Made by Jhonatan de Souza")
+        footer_font = QFont("Helvetica", 10)
         footer_label.setFont(footer_font)
         footer_label.setAlignment(Qt.AlignCenter)
         footer_label.setObjectName("footer")
@@ -129,7 +129,7 @@ class JobSearchWindow(QMainWindow):
         
         QLabel#subtitle {
             color: #818384;
-            margin-top: -5px;
+            margin: 8px 0px;
         }
         
         QLabel#label {

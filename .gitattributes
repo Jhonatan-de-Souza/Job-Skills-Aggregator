@@ -5,6 +5,9 @@
 
 jhonatan/** linguist-vendored
 
+html/** linguist-vendored
+*.html linguist-vendored
+
 README.md linguist-documentation
 readme.md linguist-documentation
 
